@@ -96,7 +96,7 @@ function clearConfig(callback) {
         "coin": "zen",
         "rpcUser": "",
         "rpcPass": "",
-        "rpcIP": "",
+        "rpcIP": "127.0.0.1",
         "rpcPort": "",
         "binaryPathWin": "",
         "binaryPathMacOS": "",
@@ -286,7 +286,7 @@ function startWallet() {
     }
     else {
         if(initWalletCount === 10){
-            dialog.showErrorBox("Wallet daemon can not be run.", "Wallet daemon is not working on your system.");
+            dialog.showErrorBox("Wallet daemon can not be run.", "Check if daemon does not run already.");
             app.quit();
         }
         initWalletCount++;
