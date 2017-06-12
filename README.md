@@ -1,5 +1,7 @@
 # Eleos
 
+Assistance is available: Zen Slack – get a login at https://slackinvite.zensystem.io and the slack is at https://zencash.slack.com
+
 Eleos is a multi-platform wallet for zero-knowledge cryptocurrencies written in Electron. 
 
   - Compatible with Windows, MacOS, and Linux
