@@ -71,8 +71,7 @@ Want to contribute? Great! We need help.
  - Write MOAR documentation
 
 ### Help!
-  - Chat:   [Zdeveloper RocketChat](https://rocketchat.zdeveloper.org)
-  - Slack:  zencash.slack.com
+  - Slack:  get a login at https://slackinvite.zensystem.io and the slack is at https://zencash.slack.com
   - Other:  Submit a Github issue as needed.
 
 ### License
