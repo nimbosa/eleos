@@ -141,8 +141,7 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zclrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8232",
-            "addnode=zcl.suprnova.cc"
+            "rpcport=8232"
         ];
         fs.writeFileSync(app.getPath("appData") + zclPath + "/zclassic.conf", data.join("\n"));
     }
@@ -153,8 +152,7 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zcashrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8233",
-            "addnode=zec.suprnova.cc"
+            "rpcport=8233"
         ];
         fs.writeFileSync(app.getPath("appData") + zecPath + "/zcash.conf", data.join("\n"));
     }
@@ -165,12 +163,7 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zenrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8231",
-            "addnode=zen.suprnova.cc",
-            "addnode=zpool.blockoperations.com",
-            "addnode=zen.bitfire.one",
-            "addnode=zenmine.pro",
-            "addnode=minez.zone"
+            "rpcport=8231"
         ];
         fs.writeFileSync(app.getPath("appData") + zenPath + "/zen.conf", data.join("\n"));
     }
