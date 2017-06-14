@@ -4,6 +4,7 @@
 "use strict";
 
 const {ipcRenderer} = require("electron");
+const {clipboard} = require('electron');
 let tableify = require("tableify");
 
 let memos = [], options = [], oldOptions = [], privTxs = [], shieldedOpts = [], transOpts = [], txs = [];
@@ -50,7 +51,9 @@ function showTxDetails(txid) {
         `Confirmations: ${obj.confirmations}\n` +
         `Fee: ${obj.fee}\n` +
         `Time: ${obj.time}\n` +
-        `TXID: ${obj.txid}\n`;
+        `TXID: ${obj.txid}\n` +
+        `TXID automatically copied to clipboard`;
+    clipboard.writeText(obj.txid);
     window.alert(alertText);
 }
 
