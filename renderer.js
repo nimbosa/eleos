@@ -9,10 +9,6 @@ let tableify = require("tableify");
 let memos = [], options = [], oldOptions = [], privTxs = [], shieldedOpts = [], transOpts = [], txs = [];
 let genHistory = {"transparent": false, "private": false};
 
-// Array.prototype.getRandom = function () {
-//     return this[Math.floor(Math.random() * this.length)];
-// };
-
 function hexToString(s) {
     let str = "";
     for (let i = 0; i < s.length; i++) {
