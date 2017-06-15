@@ -1,17 +1,17 @@
 {
   "name": "Eleos",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A minimal Equihash wallet",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/zencashio/eleos",
+  "repository": "https://github.com/zencashofficial/eleos",
   "keywords": [
     "zencash",
     "zclassic",
-    "equihash",
     "zcash",
+    "equihash",
     "wallet"
   ],
   "author": "Zen Team",
@@ -27,6 +27,7 @@
     "http-auth": "^3.1.3",
     "node-gyp": "^3.6.2",
     "node-pty": "^0.6.6",
+    "passport-local": "^1.0.0",
     "request": "^2.81.0",
     "request-progress": "^3.0.0",
     "tableify": "^1.0.1",
