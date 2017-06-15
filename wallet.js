@@ -121,7 +121,12 @@ function jsonQuery(query, callback) {
             console.log("Cannot authenticate with wallet RPC service. Check username and password.");
             callback(response.body);
         } else if (!error) {
-            callback(response.body);
+            try {
+                callback(response.body);
+            } catch (err)
+            {
+                console.log(err.message);
+            }
         }
     });
 }

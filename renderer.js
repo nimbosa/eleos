@@ -3,7 +3,7 @@
 /*jslint node: true */
 "use strict";
 
-const {ipcRenderer} = require("electron")
+const {ipcRenderer} = require("electron");
 const {clipboard} = require('electron');
 let tableify = require("tableify");
 
