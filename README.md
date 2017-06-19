@@ -86,3 +86,4 @@ Want to contribute? Great! We need help.
 
 ### License
 Common Public Attribution License (CPAL-1.0)
+(c)2017 Josh Yabut, (c)2017 ZenCashOficial
