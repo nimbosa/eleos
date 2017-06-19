@@ -19,8 +19,18 @@ The simplest way to get started on Windows or MacOS is to [download and run the 
 ##### Linux
 Note: Eleos requires that the compiled wallets are named zcashd-linux or zcld-linux and are saved into the eleos directory.
 Get the dependencies
+
+The default Node.JS version in the default Debian repositories is incompatible with Eleos, you'll need to download the latest version:
 ```
-sudo apt-get install node.js nodejs-legacy npm
+curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+vim nodesource_setup.sh
+chmod +x nodesource_setup.sh
+./nodesource_setup.sh
+apt-get install nodejs
+```
+
+You'll also need various npn packages:
+```
 npm install electron tcp-port-used tar-fs request-progress ht-auth express-ws node-pty
 ```
 
