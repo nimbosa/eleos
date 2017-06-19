@@ -23,7 +23,7 @@ Get the dependencies
 The default Node.JS version in the default Debian repositories is incompatible with Eleos, you'll need to download the latest version:
 ```
 curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-vim nodesource_setup.sh
+vim nodesource_setup.sh        # Read the file before running it to make sure it's not malicious
 chmod +x nodesource_setup.sh
 ./nodesource_setup.sh
 apt-get install nodejs
