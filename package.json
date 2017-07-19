@@ -1,6 +1,6 @@
 {
   "name": "eleos",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A minimal Equihash wallet",
   "main": "main.js",
   "scripts": {
@@ -46,6 +46,6 @@
     "electron-installer-dmg": "*",
     "electron-installer-windows": "^0.2.0",
     "electron-rebuild": "^1.5.11",
-    "flow-bin": "^0.47.0"
+    "flow-bin": "^0.50.0"
   }
 }
