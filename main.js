@@ -96,7 +96,7 @@ function clearConfig(callback) {
         "coin": "zen",
         "rpcUser": "",
         "rpcPass": "",
-        "rpcIP": "",
+        "rpcIP": "127.0.0.1",
         "rpcPort": "",
         "binaryPathWin": "",
         "binaryPathMacOS": "",
@@ -141,7 +141,8 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zclrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8232"
+            "rpcport=8232",
+            "addnode=zcl.suprnova.cc"
         ];
         fs.writeFileSync(app.getPath("appData") + zclPath + "/zclassic.conf", data.join("\n"));
     }
@@ -152,7 +153,8 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zcashrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8233"
+            "rpcport=8233",
+            "addnode=zec.suprnova.cc"
         ];
         fs.writeFileSync(app.getPath("appData") + zecPath + "/zcash.conf", data.join("\n"));
     }
@@ -163,7 +165,12 @@ function checkCoinConfig(callback) {
         let data = [
             "rpcuser=zenrpc",
             "rpcpassword=" + crypto.randomBytes(8).toString("hex"),
-            "rpcport=8231"
+            "rpcport=8231",
+            "addnode=zen.suprnova.cc",
+            "addnode=zpool.blockoperations.com",
+            "addnode=zen.bitfire.one",
+            "addnode=zenmine.pro",
+            "addnode=minez.zone"
         ];
         fs.writeFileSync(app.getPath("appData") + zenPath + "/zen.conf", data.join("\n"));
     }
@@ -282,12 +289,12 @@ function startWallet() {
     // check if wallet binary exists first
     if (!fs.existsSync(cmd)) {
         dialog.showErrorBox("Could not find wallet daemon", "Double-check the configuration settings.");
-        app.quit();
+        app.exit(1);
     }
     else {
         if(initWalletCount === 10){
-            dialog.showErrorBox("Wallet daemon can not be run.", "Wallet daemon is not working on your system.");
-            app.quit();
+            dialog.showErrorBox("Wallet daemon can not be run.", "Check if daemon does not run already.");
+            app.exit(1);
         }
         initWalletCount++;
         if (!zcashd && (keyVerification.verifying === true && keyVerification.proving === true && configComplete === true)) {
@@ -452,7 +459,9 @@ function createWindow() {
                                 title: "Import complete.",
                                 message: "Press ok to restart wallet."
                             });
-                            app.quit();
+
+                            app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])});
+                            app.exit(0);
                         });
                     }
                 },
@@ -563,9 +572,14 @@ function createWindow() {
                                 dialog.showMessageBox(null, {
                                     type: "info",
                                     title: "Restoration completed.",
-                                    message: "You can switch to ZEN now. Press ok to restart wallet."
+                                    message: "Switching to ZEN now. Press ok to restart wallet."
                                 });
-                                app.quit();
+
+                                config.coin = "zen";
+                                writeConfig(JSON.stringify(config, null, 4));
+
+                                app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])});
+                                app.exit(0);
                             });
                         }
                     }
@@ -598,7 +612,8 @@ function createWindow() {
                                 config.coin = "zcl";
                                 writeConfig(JSON.stringify(config, null, 4));
                                 dialog.showErrorBox("Restart wallet", "Wallet must be restarted to switch coins.");
-                                app.quit();
+                                app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])});
+                                app.exit(0);
                             }
                         },
                         {
@@ -609,7 +624,8 @@ function createWindow() {
                                 config.coin = "zec";
                                 writeConfig(JSON.stringify(config, null, 4));
                                 dialog.showErrorBox("Restart wallet", "Wallet must be restarted to switch coins.");
-                                app.quit();
+                                app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])});
+                                app.exit(0);
                             }
                         },
                         {
@@ -620,7 +636,8 @@ function createWindow() {
                                 config.coin = "zen";
                                 writeConfig(JSON.stringify(config, null, 4));
                                 dialog.showErrorBox("Restart wallet", "Wallet must be restarted to switch coins.");
-                                app.quit();
+                                app.relaunch({args: process.argv.slice(1).concat(['--relaunch'])});
+                                app.exit(0);
                             }
                         }
                     ]
@@ -739,7 +756,7 @@ app.on("ready", function () {
 
 app.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
-        app.quit();
+        app.exit(0);
     }
 });
 

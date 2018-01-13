@@ -4,14 +4,11 @@
 "use strict";
 
 const {ipcRenderer} = require("electron");
+const {clipboard} = require('electron');
 let tableify = require("tableify");
 
 let memos = [], options = [], oldOptions = [], privTxs = [], shieldedOpts = [], transOpts = [], txs = [];
 let genHistory = {"transparent": false, "private": false};
-
-// Array.prototype.getRandom = function () {
-//     return this[Math.floor(Math.random() * this.length)];
-// };
 
 function hexToString(s) {
     let str = "";
@@ -54,7 +51,9 @@ function showTxDetails(txid) {
         `Confirmations: ${obj.confirmations}\n` +
         `Fee: ${obj.fee}\n` +
         `Time: ${obj.time}\n` +
-        `TXID: ${obj.txid}\n`;
+        `TXID: ${obj.txid}\n` +
+        `TXID automatically copied to clipboard`;
+    clipboard.writeText(obj.txid);
     window.alert(alertText);
 }
 
@@ -67,9 +66,9 @@ function generateMemoTable(memos) {
         return b.time - a.time;
     });
     for (let i = 0; i < localMemos.length; i++) {
-        localMemos[i]["details"] = '<a href="javascript:void(0)" onclick="renderer.showTxDetails(\'' + localMemos[i].txid + '\')">click</a>';
-        let datetime = new Date(localMemos[i]["time"] * 1000);
-        localMemos[i]["time"] = datetime.toLocaleTimeString() + " - " + datetime.toLocaleDateString();
+        localMemos[i].details = '<a href="javascript:void(0)" onclick="renderer.showTxDetails(\'' + localMemos[i].txid + '\')">click</a>';
+        let datetime = new Date(localMemos[i].time * 1000);
+        localMemos[i].time = datetime.toLocaleTimeString() + " - " + datetime.toLocaleDateString();
         delete localMemos[i].txid;
     }
     // build empty table if no results
@@ -105,9 +104,9 @@ function generateHistoryTable(txs, privTxs) {
                 time: combinedTxs[i].time
             });
         }
-        let datetime = new Date(combinedTxs[i]["time"] * 1000);
-        combinedTxs[i]["time"] = datetime.toLocaleTimeString() + " - " + datetime.toLocaleDateString();
-        combinedTxs[i]["details"] = '<a href="javascript:void(0)" onclick="renderer.showTxDetails(\'' + combinedTxs[i].txid + '\')">click</a>';
+        let datetime = new Date(combinedTxs[i].time * 1000);
+        combinedTxs[i].time = datetime.toLocaleTimeString() + " - " + datetime.toLocaleDateString();
+        combinedTxs[i].details = '<a href="javascript:void(0)" onclick="renderer.showTxDetails(\'' + combinedTxs[i].txid + '\')">click</a>';
         delete combinedTxs[i].txid;
         delete combinedTxs[i].memo;
     }
@@ -370,7 +369,9 @@ function refreshUI() {
                 different = true;
             }
         }
-        if (!different){ return;}
+        if (!different) {
+            return;
+        }
     }
     if (different && options.length > 0) {
         document.getElementById("privateFromSelect").innerHTML = "";
